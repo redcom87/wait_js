@@ -1,4 +1,4 @@
-(function(){// Monitor AJAX calls and keep a count of how many requests have been sent and how many response have been received.
+(function(){// Monitor AJAX calls and keep a count of how many requests have been sent and how many responses have been received.
 	window.AJAX_REQUESTS_COUNT = 0;
 	window.AJAX_RESPONSES_COUNT = 0;
 	// This is just a proxy, it overrides the XMLHttpRequest.send method to monitor it.
@@ -30,16 +30,16 @@ window.callWhenReadyToGo = function(selector, callback, timeout){
 		return document.querySelector(that.selector);
 	}
 	this.check = function(){
-		if(that.isInDOM()){ // The element is in the DOM, check AJAX call for cases when the change involves changing the elemnt's content.
+		if(that.isInDOM()){ // The element is in the DOM, check AJAX call for cases when the change involves changing the element's content.
 			that.elementPresent();
 			return true;
 		}
 		return false;
 	}
 	this.elementPresent = function(){
-		// This function is called when the element is present in the come
+		// This function is called when the element is present to come.
 		if(window.AJAX_REQUESTS_COUNT === window.AJAX_RESPONSES_COUNT || (that.isInDOM() && new Date().getTime() - that.startedAt > (1000 * 15))){
-			// All the AJAX requests tha were sent have been responded to or the element is present and it has been more then 15 seconds since "callWhenReadyToGo" was called
+			// All the AJAX requests that were sent have been responded to or the element is present and it has been more then 15 seconds since "callWhenReadyToGo" was called.
 			that.wasResponds = true;
 			clearTimeout(that.timeoutId);
 			that.callback();
@@ -48,7 +48,7 @@ window.callWhenReadyToGo = function(selector, callback, timeout){
 			that.ajaxTimeout = setTimeout(elementPresent, 10);
 		}
 	}
-	if(!this.check()){ // The element is not present in the DOM, start monitoring DOM changes
+	if(!this.check()){ // The element is not present in the DOM, start monitoring DOM changes.
 		that.observer = new MutationObserver(function(){
 			if(that.check()){ // the DOM has changed, check if the elment was added to the DOM and if so, stop listening for DOM changes.
 				that.observer.disconnect();
